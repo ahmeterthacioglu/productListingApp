@@ -1,0 +1,345 @@
+.collapsible-filter-sort {
+    background: #f5f5f5;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .filter-sort-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #f9f9f9;
+    border-bottom: 1px solid #e0e0e0;
+    min-height: 60px;
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .expand-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+  
+  .expand-toggle:hover {
+    background: #e8e8e8;
+  }
+  
+  .toggle-icon {
+    font-size: 12px;
+    color: #666;
+    transition: transform 0.2s;
+  }
+  
+  .toggle-text {
+    position: relative;
+  }
+  
+  .active-indicator {
+    color: #4CAF50;
+    font-size: 18px;
+    margin-left: 5px;
+  }
+  
+  .product-count-compact {
+    font-size: 13px;
+    color: #666;
+    font-weight: 500;
+  }
+  
+  .quick-sort {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .sort-label {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+  }
+  
+  .sort-buttons-compact {
+    display: flex;
+    gap: 6px;
+  }
+  
+  .sort-btn-compact {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    color: #666;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 400;
+  }
+  
+  .sort-btn-compact:hover {
+    border-color: #4CAF50;
+    background: #f8fff8;
+  }
+  
+  .sort-btn-compact.active {
+    border-color: #4CAF50;
+    background: #4CAF50;
+    color: white;
+    font-weight: 500;
+  }
+  
+  .sort-icon-compact {
+    font-size: 10px;
+    opacity: 0.7;
+  }
+  
+  .filter-sort-content {
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    overflow: hidden;
+  }
+  
+  .filter-sort-content.collapsed {
+    max-height: 0;
+    opacity: 0;
+  }
+  
+  .filter-sort-content.expanded {
+    max-height: 500px;
+    opacity: 1;
+  }
+  
+  .content-inner {
+    padding: 20px;
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  /* Detailed Filters */
+  .detailed-filters h4,
+  .detailed-sorting h4 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .filter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .filter-group label {
+    font-size: 12px;
+    color: #666;
+    font-weight: 500;
+  }
+  
+  .filter-group input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .filter-group input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  }
+  
+  .filter-group input.invalid {
+    border-color: #f44336;
+    box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.1);
+  }
+  
+  /* Detailed Sorting */
+  .sort-options-detailed {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .sort-btn-detailed {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    color: #666;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+  
+  .sort-btn-detailed:hover:not(:disabled) {
+    border-color: #4CAF50;
+    background: #f8fff8;
+  }
+  
+  .sort-btn-detailed.active {
+    border-color: #4CAF50;
+    background: #4CAF50;
+    color: white;
+    font-weight: 500;
+  }
+  
+  .sort-btn-detailed:disabled {
+    background: #f5f5f5;
+    color: #999;
+    cursor: not-allowed;
+  }
+  
+  .sort-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .sort-direction {
+    font-size: 11px;
+    opacity: 0.8;
+  }
+  
+  .sort-icon {
+    font-size: 12px;
+    font-weight: bold;
+    opacity: 0.7;
+  }
+  
+  .action-buttons {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  .apply-btn, .clear-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+    min-width: 120px;
+  }
+  
+  .apply-btn {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  .apply-btn:hover {
+    background: #45a049;
+  }
+  
+  .clear-btn {
+    background: #f44336;
+    color: white;
+  }
+  
+  .clear-btn:hover {
+    background: #da190b;
+  }
+  
+  @media (max-width: 992px) {
+    .content-inner {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    .filter-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .filter-sort-header {
+      flex-direction: column;
+      gap: 15px;
+      align-items: stretch;
+    }
+    
+    .header-left {
+      justify-content: center;
+    }
+    
+    .quick-sort {
+      justify-content: center;
+    }
+    
+    .sort-buttons-compact {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .content-inner {
+      padding: 15px;
+    }
+    
+    .action-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .apply-btn, .clear-btn {
+      width: 100%;
+      max-width: 200px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .filter-sort-header {
+      padding: 12px 15px;
+    }
+    
+    .expand-toggle {
+      padding: 6px 8px;
+      font-size: 13px;
+    }
+    
+    .sort-btn-compact {
+      padding: 5px 8px;
+      font-size: 11px;
+    }
+    
+    .product-count-compact {
+      font-size: 12px;
+    }
+  }

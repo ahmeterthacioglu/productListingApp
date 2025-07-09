@@ -1,0 +1,41 @@
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .star {
+    color: #ffd700;
+    font-size: 16px;
+    transition: color 0.2s;
+  }
+  
+  .star.empty {
+    color: #ddd;
+  }
+  
+  .star.half {
+    background: linear-gradient(90deg, #ffd700 50%, #ddd 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .rating-text {
+    font-size: 14px;
+    color: #333;
+    margin-left: 5px;
+    font-weight: 400;
+  }
+  
+  @media (max-width: 480px) {
+    .star {
+      font-size: 14px;
+    }
+    
+    .rating-text {
+      font-size: 12px;
+    }
+  }

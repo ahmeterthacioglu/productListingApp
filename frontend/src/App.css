@@ -1,0 +1,267 @@
+.product-listing-app {
+  font-family: 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  font-family: 'Avenir', sans-serif;
+  font-size: 45px;
+  font-weight: 900;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px 0;
+}
+
+.carousel-overflow {
+  flex: 1;
+  overflow: hidden;
+  margin: 0 15px;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.carousel-wrapper {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  gap: 0;
+}
+
+.product-card {
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  margin: 0 10px;
+  min-width: 280px;
+  flex-shrink: 0;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.product-title {
+  font-family: 'Avenir', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-price {
+  font-family: 'Avenir', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.carousel-btn {
+  background: rgba(51, 51, 51, 0.8);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.carousel-btn:hover:not(:disabled) {
+  background: rgba(85, 85, 85, 0.9);
+  transform: scale(1.1);
+}
+
+.carousel-btn:disabled {
+  background: rgba(204, 204, 204, 0.6);
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.5;
+}
+
+.carousel-btn.prev {
+  margin-right: 10px;
+}
+
+.carousel-btn.next {
+  margin-left: 10px;
+}
+
+.product-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #666;
+}
+
+.product-count {
+  font-family: 'Avenir', sans-serif;
+  font-weight: 500;
+  color: #333;
+}
+
+.gold-price-info {
+  font-family: 'Avenir', sans-serif;
+  font-style: italic;
+  color: #888;
+}
+
+.scroll-track-container {
+  width: 100%;
+  padding: 15px 0;
+  margin: 20px 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.scroll-track-container.dragging {
+  cursor: grabbing;
+}
+
+.scroll-track {
+  width: 100%;
+  height: 4px;
+  background-color: #e0e0e0;
+  border-radius: 2px;
+  position: relative;
+}
+
+.scroll-thumb {
+  position: absolute;
+  top: -4px;
+  height: 12px;
+  background-color: #999;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  cursor: grab;
+  user-select: none;
+}
+
+.scroll-thumb:hover {
+  background-color: #666;
+}
+
+.scroll-thumb:active,
+.dragging .scroll-thumb {
+  cursor: grabbing;
+  background-color: #444;
+}
+
+.scroll-track-container:hover .scroll-track {
+  height: 6px;
+}
+
+.scroll-track-container:hover .scroll-thumb {
+  top: -3px;
+}
+
+@media (max-width: 1200px) {
+  .product-card {
+    min-width: 260px;
+    padding: 18px;
+  }
+  
+  .product-image {
+    height: 180px;
+  }
+}
+
+@media (max-width: 992px) {
+  .product-card {
+    min-width: 240px;
+    padding: 15px;
+  }
+  
+  .carousel-overflow {
+    margin: 0 10px;
+  }
+  
+  .carousel-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+  }
+  
+  .header h1 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 680px) {
+  .product-listing-app {
+    padding: 10px;
+  }
+  
+  .product-card {
+    min-width: 200px;
+    margin: 0 5px;
+    padding: 12px;
+  }
+  
+  .carousel-overflow {
+    margin: 0 5px;
+  }
+  
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  
+  .product-image {
+    height: 160px;
+  }
+  
+  .header h1 {
+    font-size: 28px;
+  }
+  
+  .product-info {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}

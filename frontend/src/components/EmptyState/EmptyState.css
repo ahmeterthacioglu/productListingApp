@@ -1,0 +1,57 @@
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+  }
+  
+  .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.7;
+  }
+  
+  .empty-message {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
+  .empty-action-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+    font-weight: 500;
+  }
+  
+  .empty-action-btn:hover {
+    background: #45a049;
+  }
+  
+  .empty-action-btn:focus {
+    outline: 2px solid #4CAF50;
+    outline-offset: 2px;
+  }
+  
+  @media (max-width: 480px) {
+    .empty-state {
+      padding: 40px 20px;
+    }
+    
+    .empty-icon {
+      font-size: 40px;
+    }
+    
+    .empty-message {
+      font-size: 14px;
+    }
+    
+    .empty-action-btn {
+      font-size: 13px;
+      padding: 8px 16px;
+    }
+  }
