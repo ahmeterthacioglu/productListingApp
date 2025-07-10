@@ -1,0 +1,126 @@
+.favorites-button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    color: #666;
+  }
+  
+  .favorites-button:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: #f44336;
+  }
+  
+  .favorites-button.active {
+    background: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+    border: 2px solid #f44336;
+  }
+  
+  .favorites-button.active:hover {
+    background: rgba(244, 67, 54, 0.2);
+    transform: scale(1.1);
+  }
+  
+  .favorites-button.animating {
+    animation: favoritesPulse 0.3s ease-out;
+  }
+  
+  @keyframes favoritesPulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.3);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+  
+  .heart-symbol {
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1;
+    transition: all 0.2s ease;
+    user-select: none;
+  }
+  
+  .favorites-button.active .heart-symbol {
+    color: #f44336;
+  }
+  
+  .favorites-button:hover .heart-symbol {
+    transform: scale(1.1);
+  }
+  
+  .favorites-button.animating .heart-symbol {
+    animation: heartBeat 0.3s ease-out;
+  }
+  
+  @keyframes heartBeat {
+    0% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.2);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    75% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+  
+  .favorites-button:focus {
+    outline: 2px solid #4CAF50;
+    outline-offset: 2px;
+  }
+  
+  @media (max-width: 768px) {
+    .favorites-button {
+      width: 32px;
+      height: 32px;
+      top: 10px;
+      right: 10px;
+    }
+    
+    .heart-symbol {
+      font-size: 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .favorites-button {
+      width: 28px;
+      height: 28px;
+      top: 8px;
+      right: 8px;
+    }
+    
+    .heart-symbol {
+      font-size: 14px;
+    }
+  }
+  
+  .product-card {
+    position: relative;
+  }

@@ -472,6 +472,12 @@ app.get('/', (req, res) => {
   });
 });
 
+// Future endpoints 
+//(not needed now because there is no user and I used local storage for keeping that information which is enough for now):
+// POST /api/favorites - Add to favorites
+// DELETE /api/favorites/:productId - Remove from favorites  
+// GET /api/favorites - Get user's favorites
+
 app.use((error, req, res, next) => {
   console.error('Global error handler:', error);
   res.status(500).json({

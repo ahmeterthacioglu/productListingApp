@@ -1,0 +1,127 @@
+.favorites-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .favorites-filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 2px solid #ddd;
+    border-radius: 20px;
+    background: white;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .favorites-filter-btn:hover {
+    border-color: #f44336;
+    color: #f44336;
+    background: rgba(244, 67, 54, 0.05);
+    transform: translateY(-1px);
+  }
+  
+  .favorites-filter-btn.active {
+    border-color: #f44336;
+    background: #f44336;
+    color: white;
+    box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
+  }
+  
+  .favorites-filter-btn.active:hover {
+    background: #d32f2f;
+    border-color: #d32f2f;
+  }
+  
+  .heart-symbol {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1;
+    transition: transform 0.2s ease;
+    user-select: none;
+  }
+  
+  .favorites-filter-btn:hover .heart-symbol {
+    transform: scale(1.1);
+  }
+  
+  .favorites-filter-btn.active .heart-symbol {
+    animation: heartPulse 0.6s ease-in-out;
+  }
+  
+  @keyframes heartPulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+  }
+  
+  .favorites-text {
+    font-family: 'Avenir', sans-serif;
+    font-weight: 500;
+  }
+  
+  .favorites-badge {
+    background: #ff6b6b;
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  
+  .favorites-filter-btn.active .favorites-badge {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+  }
+  
+  .favorites-filter-btn:focus {
+    outline: 2px solid #4CAF50;
+    outline-offset: 2px;
+  }
+  
+  @media (max-width: 768px) {
+    .favorites-filter-btn {
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+    
+    .heart-symbol {
+      font-size: 14px;
+    }
+    
+    .favorites-badge {
+      font-size: 10px;
+      min-width: 16px;
+      height: 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .favorites-filter-btn {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+    
+    .favorites-text {
+      display: none;
+    }
+    
+    .heart-symbol {
+      font-size: 16px;
+    }
+  }

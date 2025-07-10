@@ -9,7 +9,8 @@ const CollapsibleFilterSort = ({
   sortBy,
   sortOrder,
   onSortChange,
-  productCount
+  productCount,
+  additionalFilters // New prop for favorites filter
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -89,6 +90,13 @@ const CollapsibleFilterSort = ({
           <div className="product-count-compact">
             {productCount} products
           </div>
+          
+          {/* Add favorites filter here */}
+          {additionalFilters && (
+            <div className="additional-filters">
+              {additionalFilters}
+            </div>
+          )}
         </div>
 
         <div className="quick-sort">

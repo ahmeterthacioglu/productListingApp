@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import './App.css';
 
 import Toast from './components/Toast/Toast';
@@ -7,13 +7,15 @@ import ColorPicker from './components/ColorPicker/ColorPicker';
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
 import EmptyState from './components/EmptyState/EmptyState';
 import CollapsibleFilterSort from './components/CollapsibleFilterSort/CollapsibleFilterSort';
+import FavoritesButton from './components/FavoritesButton/FavoritesButton';
+import FavoritesFilter from './components/FavoritesFilter/FavoritesFilter';
+import useFavorites from './hooks/useFavorites';
 
-import { sortProducts, getSortDescription } from './utils/sortingUtils'; // I couldn't fix it
+import { sortProducts, getSortDescription } from './utils/sortingUtils';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
 
 export default function ProductListingApp() {
-
   const [products, setProducts] = useState([]);
   const [originalProducts, setOriginalProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,6 +24,7 @@ export default function ProductListingApp() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedColors, setSelectedColors] = useState({});
   const [slidesToShow, setSlidesToShow] = useState(4);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [filters, setFilters] = useState({
     minPrice: '',
     maxPrice: '',
@@ -41,7 +44,24 @@ export default function ProductListingApp() {
   const touchStartYRef = useRef(0);
   const isTouchingRef = useRef(false);
 
-  const maxSlide = Math.max(0, products.length - slidesToShow);
+  const {
+    isFavorite,
+    toggleFavorite,
+    getFavoritesCount
+  } = useFavorites();
+
+  const filteredProducts = useMemo(() => {
+    if (showFavoritesOnly) {
+      const favoriteProducts = products.filter(product => {
+        const productId = product.name; // Use name consistently
+        const isFav = isFavorite(productId);
+        return isFav;
+      });
+      return favoriteProducts;
+    }
+    return products;
+  }, [products, showFavoritesOnly, isFavorite]);
+  const maxSlide = Math.max(0, filteredProducts.length - slidesToShow);
 
   const validateFilters = () => {
     const errors = [];
@@ -124,11 +144,11 @@ export default function ProductListingApp() {
     const newSlidesToShow = getSlidesCount();
     setSlidesToShow(newSlidesToShow);
     
-    const maxSlide = Math.max(0, products.length - newSlidesToShow);
+    const maxSlide = Math.max(0, filteredProducts.length - newSlidesToShow);
     if (currentSlide > maxSlide) {
       setCurrentSlide(maxSlide);
     }
-  }, [products.length, currentSlide]);
+  }, [filteredProducts.length, currentSlide]);
 
   useEffect(() => {
     window.addEventListener('resize', updateSlidesToShow);
@@ -200,6 +220,7 @@ export default function ProductListingApp() {
     
     setSortBy('default');
     setSortOrder('asc');
+    setShowFavoritesOnly(false);
     
     setError(null);
     setSuccessMessage(null);
@@ -240,6 +261,10 @@ export default function ProductListingApp() {
     }
   }, [sortBy, sortOrder, originalProducts, applySorting]);
 
+  useEffect(() => {
+    setCurrentSlide(0);
+  }, [showFavoritesOnly]);
+
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters(prev => ({ ...prev, [name]: value }));
@@ -269,6 +294,21 @@ export default function ProductListingApp() {
     setSelectedColors(prev => ({ ...prev, [productName]: color }));
   };
 
+  const handleToggleFavorites = () => {
+    setShowFavoritesOnly(prev => !prev);
+  };
+
+  const handleFavoriteToggle = (product) => {
+    const productId = product.name; // Use name consistently
+    const wasAdded = toggleFavorite(productId);
+    
+    if (wasAdded) {
+      setSuccessMessage(`${product.name} added to favorites`);
+    } else {
+      setSuccessMessage(`${product.name} removed from favorites`);
+    }
+  };
+
   const handleMouseDown = useCallback((e) => {
     if (!scrollTrackRef.current) return;
     isDraggingRef.current = true;
@@ -283,7 +323,7 @@ export default function ProductListingApp() {
   const handleMouseMove = useCallback((e) => {
     if (!isDraggingRef.current || !scrollTrackRef.current) return;
     const trackWidth = scrollTrackRef.current.offsetWidth;
-    const thumbWidth = trackWidth * (slidesToShow / products.length);
+    const thumbWidth = trackWidth * (slidesToShow / filteredProducts.length);
     const effectiveTrackWidth = trackWidth - thumbWidth;
     
     const deltaX = e.clientX - dragStartXRef.current;
@@ -293,7 +333,7 @@ export default function ProductListingApp() {
     const newSlide = dragStartSlideRef.current + slideChange;
     
     setCurrentSlide(Math.max(0, Math.min(Math.round(newSlide), maxSlide)));
-  }, [maxSlide, products.length, slidesToShow]);
+  }, [maxSlide, filteredProducts.length, slidesToShow]);
 
   const handleMouseUp = useCallback(() => {
     isDraggingRef.current = false;
@@ -366,10 +406,21 @@ export default function ProductListingApp() {
         sortOrder={sortOrder}
         onSortChange={handleSortChange}
         productCount={products.length}
+        additionalFilters={
+          <FavoritesFilter
+            showFavoritesOnly={showFavoritesOnly}
+            onToggleFavorites={handleToggleFavorites}
+            favoritesCount={getFavoritesCount()}
+          />
+        }
       />
 
-      {products.length === 0 ? (
-        <EmptyState onAction={clearFilters} />
+      {filteredProducts.length === 0 ? (
+        <EmptyState 
+          onAction={showFavoritesOnly ? () => setShowFavoritesOnly(false) : clearFilters}
+          message={showFavoritesOnly ? "No favorite products found" : "No products found"}
+          actionText={showFavoritesOnly ? "Show All Products" : "Clear Filters"}
+        />
       ) : (
         <>
           <div className="carousel-container">
@@ -393,7 +444,7 @@ export default function ProductListingApp() {
                   transform: `translateX(-${currentSlide * (100 / slidesToShow)}%)` 
                 }}
               >
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                   <div 
                     key={product.name} 
                     className="product-card" 
@@ -401,6 +452,12 @@ export default function ProductListingApp() {
                       flexBasis: `calc(100% / ${slidesToShow} - 20px)` 
                     }}
                   >
+                    <FavoritesButton
+                      productId={product.name}
+                      productName={product.name}
+                      onToggle={() => handleFavoriteToggle(product)}
+                    />
+                    
                     <img 
                       src={product.images[selectedColors[product.name] || 'yellow']} 
                       alt={product.name} 
@@ -432,14 +489,15 @@ export default function ProductListingApp() {
 
           <div className="product-info">
             <div className="product-count">
-              {getSortDescription(sortBy, sortOrder, products.length)}
+              {getSortDescription(sortBy, sortOrder, filteredProducts.length)}
+              {showFavoritesOnly && ` (${getFavoritesCount()} favorites)`}
             </div>
             <div className="gold-price-info">
               Current Gold Price: ${products[0]?.goldPrice}/gram (24k)
             </div>
           </div>
 
-          {products.length > slidesToShow && (
+          {filteredProducts.length > slidesToShow && (
             <div 
               className="scroll-track-container" 
               ref={scrollTrackRef} 
@@ -450,8 +508,8 @@ export default function ProductListingApp() {
                   className="scroll-thumb" 
                   onMouseDown={handleMouseDown} 
                   style={{
-                    width: `${(slidesToShow / products.length) * 100}%`,
-                    left: `${maxSlide > 0 ? (currentSlide / maxSlide) * (100 - (slidesToShow / products.length) * 100) : 0}%`
+                    width: `${(slidesToShow / filteredProducts.length) * 100}%`,
+                    left: `${maxSlide > 0 ? (currentSlide / maxSlide) * (100 - (slidesToShow / filteredProducts.length) * 100) : 0}%`
                   }}
                 />
               </div>
