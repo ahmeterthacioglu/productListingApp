@@ -5,8 +5,8 @@
 ## 🚀 Live Demo
 
 - **Frontend**: [https://renring.vercel.app](https://renring.vercel.app)
-- **Backend API**: [https://renring-api.herokuapp.com](https://renring-api.herokuapp.com)
-- **API Documentation**: [https://renring-api.herokuapp.com/](https://renring-api.herokuapp.com/)
+- **Backend API**: [https://renring-api-a52a0d7eb254.herokuapp.com](https://renring-api-a52a0d7eb254.herokuapp.com)
+- **API Documentation**: [https://renring-api-a52a0d7eb254.herokuapp.com/](https://renring-api-a52a0d7eb254.herokuapp.com/)
 
 ## ✨ Features
 
