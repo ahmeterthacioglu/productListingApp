@@ -65,8 +65,8 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/ahmeterthacioglu/productListingApp.git
-   cd productListingApp
+   git clone https://github.com/ahmeterthacioglu/renring.git
+   cd renring
    ```
 
 2. **Setup Backend**
