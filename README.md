@@ -252,25 +252,6 @@ vercel --prod
 - **Vercel Analytics**: Built-in performance monitoring
 - **Health Checks**: Automated uptime monitoring
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m '✨ feat: add amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
-
-### Commit Convention
-- `✨ feat:` - New features
-- `🐛 fix:` - Bug fixes
-- `💄 style:` - UI/UX improvements
-- `⚡ perf:` - Performance improvements
-- `📝 docs:` - Documentation updates
-- `🔧 config:` - Configuration changes
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
@@ -280,10 +261,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Avenir** - Typography
 - **React Community** - Amazing ecosystem
 
-## 📞 Support
-
-For support, email support@renring.com or join our Discord community.
-
----
-
-**Made with ❤️ by the Renring Team**
